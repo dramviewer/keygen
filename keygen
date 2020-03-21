@@ -12,6 +12,7 @@ def CreateParser():
     )
     parser.add_argument('action', type=str, choices={'write', 'clear', 'remove'})
     parser.add_argument('-f', '--file', type=str, required=False, help='by default is "keys.txt"')
+    parser.add_argument('-l', '--lines', type=int, required=False, metavar='NUMBER', help='amount of lines, which will write in file')
     args = parser.parse_args()
     return args
 
@@ -26,16 +27,12 @@ class KeyGenerate():
         self.keyFile = parser.file
 
     def makeKeyFile(self):
-        if os.path.exists(self.keyFile) == False:
-            os.mknod(self.keyFile)
-    
+        with open(self.keyFile, 'w') as f:
+            f.write('')
+
     def deleteKeyFile(self):
         if os.path.exists(self.keyFile):
             os.remove(self.keyFile)
-    
-    def purgeFile(self):
-        with open(self.keyFile, 'w') as f:
-            f.write('')
     
     def generateKey(self):
         self.makeKeyFile()
@@ -46,15 +43,26 @@ class KeyGenerate():
                 key = key + random.choice(variants)
             if i != 4:
                 key = key + '-'
+        return key
+
+    def writeKey(self):
+        key = ''
+        if parser.lines:
+            for i in range(parser.lines):
+                key += self.generateKey()
+                if i != (i-1):
+                    key += '\n'
+        else:
+            key = self.generateKey()
         with open(self.keyFile, 'a') as f:
-            f.write(f'{key}\n')
+            f.write(f'{key}')
 
 if __name__ == '__main__':
     parser = CreateParser()
     keygen = KeyGenerate(parser)
     if parser.action == 'clear':
-        keygen.purgeFile()
+        keygen.makeKeyFile()
     elif parser.action == 'remove':
         keygen.deleteKeyFile()
     else:
-        keygen.generateKey()
+        keygen.writeKey()
