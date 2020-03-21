@@ -22,6 +22,6 @@ optional arguments:
   -h, --help            show this help message and exit
   -f FILE, --file FILE  by default is "keys.txt"
   -l NUMBER, --lines NUMBER
-                        amount of lines, which will write in file
+                        amount of keys, which will write in file
 
 ```

@@ -12,7 +12,7 @@ def CreateParser():
     )
     parser.add_argument('action', type=str, choices={'write', 'clear', 'remove'})
     parser.add_argument('-f', '--file', type=str, required=False, help='by default is "keys.txt"')
-    parser.add_argument('-l', '--lines', type=int, required=False, metavar='NUMBER', help='amount of lines, which will write in file')
+    parser.add_argument('-l', '--lines', type=int, required=False, metavar='NUMBER', help='amount of keys, which will write in file')
     args = parser.parse_args()
     return args
 
