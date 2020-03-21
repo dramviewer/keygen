@@ -6,7 +6,7 @@ Generating keys in format AAAAA-AAAAA-AAAAA-AAAAA-AAAAA, where A is [A-Z] or [0-
 * Writing keys line by line in txt format file
 * You can specify name for a file or use default name
 * Also you can clear or delete that file, using this script
-* You can specify number of lines, that will be write in file, by default is one line
+* You can specify number of keys, which are will be write in file, by default is one
 
 ## Syntax
 ---
