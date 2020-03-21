@@ -46,16 +46,16 @@ class KeyGenerate():
         return key
 
     def writeKey(self):
-        key = ''
+        line = ''
         if parser.lines:
             for i in range(parser.lines):
-                key += self.generateKey()
+                line += self.generateKey()
                 if i != (i-1):
-                    key += '\n'
+                    line += '\n'
         else:
-            key = self.generateKey()
+            line = self.generateKey()
         with open(self.keyFile, 'a') as f:
-            f.write(f'{key}')
+            f.write(f'{line}')
 
 if __name__ == '__main__':
     parser = CreateParser()
