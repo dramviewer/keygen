@@ -1,0 +1,60 @@
+#! /bin/python
+
+import argparse
+import os
+import string, random
+
+def CreateParser():
+    parser = argparse.ArgumentParser(
+        prog = 'keygen',
+        #usage='%(prog)s',
+        description = '''Generating keys in format AAAAA-AAAAA-AAAAA-AAAAA-AAAAA, where A is [A-Z] or [0-9], writing they in file line by line''',
+    )
+    parser.add_argument('action', type=str, choices={'write', 'clear', 'remove'})
+    parser.add_argument('-f', '--file', type=str, required=False, help='by default is "keys.txt"')
+    args = parser.parse_args()
+    return args
+
+class KeyGenerate():
+    def __init__(self, parser):
+        self.parser = parser
+        if parser.file:
+            self.fileInit()
+        else:
+            self.keyFile = 'keys.txt'
+    def fileInit(self):
+        self.keyFile = parser.file
+
+    def makeKeyFile(self):
+        if os.path.exists(self.keyFile) == False:
+            os.mknod(self.keyFile)
+    
+    def deleteKeyFile(self):
+        if os.path.exists(self.keyFile):
+            os.remove(self.keyFile)
+    
+    def purgeFile(self):
+        with open(self.keyFile, 'w') as f:
+            f.write('')
+    
+    def generateKey(self):
+        self.makeKeyFile()
+        variants = string.ascii_uppercase + '0123456789'
+        key = ''
+        for i in range(5):
+            for j in range(5):
+                key = key + random.choice(variants)
+            if i != 4:
+                key = key + '-'
+        with open(self.keyFile, 'a') as f:
+            f.write(f'{key}\n')
+
+if __name__ == '__main__':
+    parser = CreateParser()
+    keygen = KeyGenerate(parser)
+    if parser.action == 'clear':
+        keygen.purgeFile()
+    elif parser.action == 'remove':
+        keygen.deleteKeyFile()
+    else:
+        keygen.generateKey()
