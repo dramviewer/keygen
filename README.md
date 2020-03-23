@@ -3,10 +3,10 @@ Generating keys in format AAAAA-AAAAA-AAAAA-AAAAA-AAAAA, where A is [A-Z] or [0-
 
 ## Features
 ---
-* Writing keys line by line in txt format file
-* You can specify name for a file or use default name
-* Also you can clear or delete that file, using this script
-* You can specify amount of keys, which are will be write in file, by default is one
+* Writing keys line by line in txt format
+* Specifying amount of keys, which are will be write in file, by default is one
+* Specifying file name or use the default name for it
+* Clear or delete key-file, using this script
 
 ## Syntax
 ---
